@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
-import React, { PureComponent } from "react";
-import { Animated } from "react-native";
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { Animated } from 'react-native';
+
 
 export default class Label extends PureComponent {
   static defaultProps = {
@@ -9,7 +10,7 @@ export default class Label extends PureComponent {
     active: false,
     focused: false,
     errored: false,
-    restricted: false
+    restricted: false,
   };
 
   static propTypes = {
@@ -33,8 +34,8 @@ export default class Label extends PureComponent {
 
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-    ])
+      PropTypes.node,
+    ]),
   };
 
   constructor(props) {
@@ -42,7 +43,7 @@ export default class Label extends PureComponent {
 
     this.state = {
       input: new Animated.Value(this.inputState()),
-      focus: new Animated.Value(this.focusState())
+      focus: new Animated.Value(this.focusState()),
     };
   }
 
@@ -53,22 +54,26 @@ export default class Label extends PureComponent {
     if (focused ^ props.focused || active ^ props.active) {
       let toValue = this.inputState(props);
 
-      Animated.timing(input, { toValue, duration }).start();
+      Animated
+        .timing(input, { toValue, duration })
+        .start();
     }
 
     if (focused ^ props.focused || errored ^ props.errored) {
       let toValue = this.focusState(props);
 
-      Animated.timing(focus, { toValue, duration }).start();
+      Animated
+        .timing(focus, { toValue, duration })
+        .start();
     }
   }
 
   inputState({ focused, active } = this.props) {
-    return active || focused ? 1 : 0;
+    return active || focused? 1 : 0;
   }
 
   focusState({ focused, errored } = this.props) {
-    return errored ? -1 : focused ? 1 : 0;
+    return errored? -1 : (focused? 1 : 0);
   }
 
   render() {
@@ -85,45 +90,44 @@ export default class Label extends PureComponent {
       basePadding,
       style,
       errored,
-      active,
+      active, 
       focused,
       animationDuration,
       ...props
     } = this.props;
 
-    let color = restricted
-      ? errorColor
-      : focus.interpolate({
-          inputRange: [-1, 0, 1],
-          outputRange: [errorColor, baseColor, tintColor]
-        });
+    let color = restricted?
+      errorColor:
+      focus.interpolate({
+        inputRange: [-1, 0, 1],
+        outputRange: [errorColor, baseColor, tintColor],
+      });
 
     let top = input.interpolate({
       inputRange: [0, 1],
       outputRange: [
-        baseSize + fontSize * 0.25,
-        baseSize - basePadding - activeFontSize
-      ]
+        16,
+        8,
+      ],
     });
 
     let textStyle = {
       fontSize: input.interpolate({
         inputRange: [0, 1],
-        outputRange: [fontSize, activeFontSize]
+        outputRange: [fontSize, activeFontSize],
       }),
 
-      color
+      color,
     };
 
     let containerStyle = {
-      position: "absolute",
-      top
+      position: 'absolute',
+      top,
+      left:12
     };
 
     return (
-      <Animated.View
-        style={[containerStyle, { right: this.props.right ? 0 : null }]}
-      >
+      <Animated.View style={containerStyle}>
         <Animated.Text style={[style, textStyle]} {...props}>
           {children}
         </Animated.Text>
