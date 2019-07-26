@@ -93,6 +93,7 @@ export default class Label extends PureComponent {
       active, 
       focused,
       animationDuration,
+      labelPadding,
       ...props
     } = this.props;
 
@@ -120,10 +121,12 @@ export default class Label extends PureComponent {
       color,
     };
 
+    debugger;
+
     let containerStyle = {
       position: 'absolute',
       top,
-      left:12
+      left:labelPadding
     };
 
     return (
