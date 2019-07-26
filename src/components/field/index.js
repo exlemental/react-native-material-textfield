@@ -375,6 +375,7 @@ export default class TextField extends PureComponent {
       ...props
     } = this.props;
 
+    debugger;
     if (props.multiline && props.height) {
       /* Disable autogrow if height is passed as prop */
       height = props.height;
@@ -514,6 +515,7 @@ export default class TextField extends PureComponent {
       focused,
       errored,
       restricted,
+      labelPadding:labelPadding,
       style: labelTextStyle,
     };
 
