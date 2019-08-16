@@ -107,7 +107,7 @@ export default class Label extends PureComponent {
     let top = input.interpolate({
       inputRange: [0, 1],
       outputRange: [
-        16,
+        28,
         8,
       ],
     });
