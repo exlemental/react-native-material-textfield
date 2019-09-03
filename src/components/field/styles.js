@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet,I18nManager } from 'react-native';
 
 export default StyleSheet.create({
   inputContainer: {
@@ -10,10 +10,11 @@ export default StyleSheet.create({
     padding: 0,
     margin: 0,
     flex: 1,
+    marginRight:I18nManager.isRTL ? 8 : 0
   },
 
   row: {
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row'
   },
 
   flex: {
