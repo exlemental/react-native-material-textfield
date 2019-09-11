@@ -121,8 +121,6 @@ export default class Label extends PureComponent {
       color,
     };
 
-    debugger;
-
     let containerStyle = {
       position: 'absolute',
       top,
